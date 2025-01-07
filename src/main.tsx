@@ -31,6 +31,8 @@ function setupApp() {
   if (!container) return;
   const root = createRoot(container);
   root.render(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     <ErrorBoundary fallbackRender={FallbackRender}>
       <Provider store={store}>
         <App />
