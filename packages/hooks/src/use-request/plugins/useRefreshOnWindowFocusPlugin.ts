@@ -9,7 +9,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
   fetchInstance,
   { focusTimespan = 5000, refreshOnWindowFocus }
 ) => {
-  const unsubscribeRef = useRef<() => void>();
+  const unsubscribeRef = useRef<(() => void) | undefined>(undefined);
 
   const stopSubscribe = () => {
     unsubscribeRef.current?.();
