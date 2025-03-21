@@ -66,7 +66,7 @@ const Role = () => {
           const label = t(enableStatusRecord[record.status]);
           return <ATag color={ATG_MAP[record.status]}>{label}</ATag>;
         },
-        title: t('page.manage.user.userStatus'),
+        title: t('page.manage.role.roleStatus'),
         width: 100
       },
       {
