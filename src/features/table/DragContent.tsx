@@ -33,10 +33,12 @@ const SortableItem: FC<{
       style={style}
       // 把拖拽所需的属性都附加上去
       {...attributes}
-      {...listeners}
       className="h-36px flex-y-center rd-4px hover:(bg-primary bg-opacity-20)"
     >
-      <IconMdiDrag className="mr-8px h-full cursor-move text-icon" />
+      <IconMdiDrag
+        className="mr-8px h-full cursor-move text-icon"
+        {...listeners}
+      />
       <ACheckbox
         checked={item.checked}
         className="none_draggable flex-1"
