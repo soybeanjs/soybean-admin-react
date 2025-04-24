@@ -55,7 +55,7 @@ const GlobalTab = () => {
 
   function handleCloseTab(tab: App.Global.Tab) {
     removeTabById(tab.id);
-    dispatch(setRemoveCacheKey(tab.routeKey));
+    dispatch(setRemoveCacheKey(tab.routePath));
   }
 
   function handleClickTab(tab: App.Global.Tab) {

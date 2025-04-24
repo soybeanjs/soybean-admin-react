@@ -1,6 +1,7 @@
 import { useEmit, useOn } from '@sa/hooks';
 
 import { useRoute, useRouter } from '@/features/router';
+import { setRemoveCacheKey } from '@/features/router/routeStore';
 import {
   addTab,
   changeTabLabel,
@@ -200,28 +201,101 @@ export function useTabActions() {
 
 export function useTabController() {
   const emit = useEmit();
+  const dispatch = useAppDispatch();
+  const tabs = useAppSelector(selectTabs);
 
   function _operateTab(eventName: TabEvent, id?: string) {
     emit(TabEvent.UPDATE_TABS, eventName, id);
   }
 
+  function _getTabRoutePaths(id: string, eventName: TabEvent): string[] {
+    const routePaths: string[] = [];
+
+    if (eventName === TabEvent.CLOSE_CURRENT) {
+      // 关闭单个标签时
+      const tab = tabs.find(tabItem => tabItem.id === id);
+      if (tab?.routePath) {
+        routePaths.push(tab.routePath);
+      }
+    } else if (eventName === TabEvent.CLEAR_LEFT_TABS) {
+      // 关闭左侧标签时
+      const index = tabs.findIndex(tabItem => tabItem.id === id);
+      if (index > 0) {
+        tabs.slice(0, index).forEach(tabItem => {
+          if (tabItem.routePath && !tabItem.fixedIndex && tabItem.fixedIndex !== 0) {
+            routePaths.push(tabItem.routePath);
+          }
+        });
+      }
+    } else if (eventName === TabEvent.CLEAR_RIGHT_TABS) {
+      // 关闭右侧标签时
+      const index = tabs.findIndex(tabItem => tabItem.id === id);
+      if (index !== -1 && index < tabs.length - 1) {
+        tabs.slice(index + 1).forEach(tabItem => {
+          if (tabItem.routePath && !tabItem.fixedIndex && tabItem.fixedIndex !== 0) {
+            routePaths.push(tabItem.routePath);
+          }
+        });
+      }
+    } else if (eventName === TabEvent.CLOSE_OTHER) {
+      // 关闭其他标签时
+      tabs.forEach(tabItem => {
+        if (tabItem.id !== id && tabItem.routePath && !tabItem.fixedIndex && tabItem.fixedIndex !== 0) {
+          routePaths.push(tabItem.routePath);
+        }
+      });
+    } else if (eventName === TabEvent.CLOSE_ALL) {
+      // 关闭所有标签时
+      tabs.forEach(tabItem => {
+        if (tabItem.routePath && !tabItem.fixedIndex && tabItem.fixedIndex !== 0) {
+          routePaths.push(tabItem.routePath);
+        }
+      });
+    }
+
+    return routePaths;
+  }
+
+  function _clearTabsCache(id: string, eventName: TabEvent) {
+    const routePaths = _getTabRoutePaths(id, eventName);
+
+    // 串行处理所有需要删除的缓存，确保每个缓存都被正确清理
+    if (routePaths.length > 0) {
+      let promise = Promise.resolve();
+
+      routePaths.forEach(path => {
+        promise = promise.then(() => {
+          return new Promise<void>(resolve => {
+            dispatch(setRemoveCacheKey(path));
+            setTimeout(resolve, 50);
+          });
+        });
+      });
+    }
+  }
+
   function clearLeftTabs(id: string) {
+    _clearTabsCache(id, TabEvent.CLEAR_LEFT_TABS);
     _operateTab(TabEvent.CLEAR_LEFT_TABS, id);
   }
 
   function clearRightTabs(id: string) {
+    _clearTabsCache(id, TabEvent.CLEAR_RIGHT_TABS);
     _operateTab(TabEvent.CLEAR_RIGHT_TABS, id);
   }
 
   function closeCurrentTab(id: string) {
+    _clearTabsCache(id, TabEvent.CLOSE_CURRENT);
     _operateTab(TabEvent.CLOSE_CURRENT, id);
   }
 
   function closeOtherTabs(id: string) {
+    _clearTabsCache(id, TabEvent.CLOSE_OTHER);
     _operateTab(TabEvent.CLOSE_OTHER, id);
   }
 
   function closeAllTabs() {
+    _clearTabsCache('', TabEvent.CLOSE_ALL);
     _operateTab(TabEvent.CLOSE_ALL);
   }
 

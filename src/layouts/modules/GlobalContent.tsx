@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import KeepAlive, { useKeepAliveRef } from 'keepalive-for-react';
+import { useLocation, useOutlet } from 'react-router-dom';
 
 import { usePreviousRoute } from '@/features/router';
-import { selectCacheRoutes, selectRemoveCacheKey } from '@/features/router/routeStore';
+import { selectCacheRoutes, selectRemoveCacheKey, setRemoveCacheKey } from '@/features/router/routeStore';
 import { useThemeSettings } from '@/features/theme';
+import { useAppDispatch, useAppSelector } from '@/hooks/business/useStore';
 import { getReloadFlag } from '@/layouts/appStore';
 import './transition.css';
 
@@ -29,12 +31,16 @@ const GlobalContent = ({ closePadding }: Props) => {
 
   const themeSetting = useThemeSettings();
 
+  const dispatch = useAppDispatch();
+
   const transitionName = themeSetting.page.animate ? themeSetting.page.animateMode : '';
 
   useUpdateEffect(() => {
     if (!aliveRef.current || !removeCacheKey) return;
 
-    aliveRef.current.destroy(removeCacheKey);
+    aliveRef.current.destroy(removeCacheKey).then(() => {
+      dispatch(setRemoveCacheKey(null));
+    });
   }, [removeCacheKey]);
 
   useUpdateEffect(() => {
