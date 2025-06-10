@@ -93,7 +93,10 @@ export function useTabActions() {
 
     // ③ 处理激活页逻辑
     if (!remainTabIds.includes(activeTabId)) {
-      const newActive = updatedTabs.at(-1);
+      const currentIndex = tabs.findIndex(tab => tab.id === activeTabId);
+      const nextTabId = tabs[currentIndex + 1]?.id || tabs[currentIndex - 1]?.id;
+      const newActive = nextTabId ? updatedTabs.find(tab => tab.id === nextTabId) : updatedTabs.at(-1);
+
       if (newActive) switchRouteByTab(newActive);
     }
     updateTabs(updatedTabs);
