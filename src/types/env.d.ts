@@ -36,7 +36,7 @@ declare namespace Env {
      *
      * This prefix is start with the icon prefix
      */
-    readonly VITE_ICON_LOCAL_PREFIX: 'local-icon';
+    readonly VITE_ICON_LOCAL_PREFIX: 'icon-local';
     /** The prefix of the iconify icon */
     readonly VITE_ICON_PREFIX: 'icon';
     /**
