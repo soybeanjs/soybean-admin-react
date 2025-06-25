@@ -11,6 +11,7 @@ import { localStg } from '@/utils/storage';
 
 import AppProvider from './components/stateful/AppProvider';
 import { antdLocales } from './locales/antd';
+import { getIsInitConstantRoute } from './store/slice/route';
 
 const watermarkProps: WatermarkProps = {
   font: {
@@ -47,7 +48,11 @@ function useTheme() {
 const App = () => {
   const locale = useAppSelector(getLocale);
 
+  const initAuthRoute = useAppSelector(getIsInitConstantRoute);
+
   const { antdTheme, themeSettings } = useTheme();
+
+  if (!initAuthRoute) return <GlobalLoading />;
 
   return (
     <AConfigProvider
