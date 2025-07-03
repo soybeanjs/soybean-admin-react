@@ -31,6 +31,7 @@ declare global {
   const ASegmented: typeof import('antd')['Segmented']
   const ASelect: typeof import('antd')['Select']
   const ASpace: typeof import('antd')['Space']
+  const ASpin: typeof import('antd')['Spin']
   const AStatistic: typeof import('antd')['Statistic']
   const ASwitch: typeof import('antd')['Switch']
   const ATable: typeof import('antd')['Table']

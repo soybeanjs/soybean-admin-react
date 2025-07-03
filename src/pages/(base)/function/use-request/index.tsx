@@ -60,24 +60,30 @@ const Component = () => {
           下一页数据
         </AButton>
 
-        <div className="mx-auto max-w-2xl rounded-lg bg-white/80 p-4 shadow-sm backdrop-blur-sm">
-          <p className="text-center text-gray-600 leading-relaxed">
+        <div className="mx-auto max-w-2xl rounded-lg p-4 shadow-sm backdrop-blur-sm">
+          <p className="text-center leading-relaxed">
             项目的useRequest相较于阿里的ahooks的useRequest，依赖刷新进行了重写，多加了一个params参数，自动推导类型并且当其中一个参数发生变化时，会自动刷新请求，使用最新的参数。
           </p>
         </div>
 
         <div className="mt-4 w-full">
-          {items.length > 0 ? (
+          {loading && (
+            <div className="flex items-center justify-center py-12">
+              <ASpin size="large" />
+            </div>
+          )}
+
+          {!loading && items.length > 0 && (
             <ADescriptions
               bordered
-              className="overflow-hidden rounded-lg bg-white/90 shadow-sm backdrop-blur-sm"
+              className="overflow-hidden rounded-lg shadow-sm backdrop-blur-sm"
               column={2}
               items={items}
               size="small"
             />
-          ) : (
-            <LookForward />
           )}
+
+          {!loading && items.length === 0 && <AEmpty />}
         </div>
       </div>
     </ACard>
