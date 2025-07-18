@@ -637,6 +637,7 @@ declare namespace App {
           colourWeakness: string;
           configOperation: {
             copyConfig: string;
+            copyFailedMsg: string;
             copySuccessMsg: string;
             resetConfig: string;
             resetSuccessMsg: string;

@@ -2,6 +2,7 @@ const theme: App.I18n.Schema['translation']['theme'] = {
   colourWeakness: 'Colour Weakness',
   configOperation: {
     copyConfig: 'Copy Config',
+    copyFailedMsg: 'Copy Failed',
     copySuccessMsg: 'Copy Success, Please replace the variable "themeSettings" in "src/theme/settings.ts"',
     resetConfig: 'Reset Config',
     resetSuccessMsg: 'Reset Success'

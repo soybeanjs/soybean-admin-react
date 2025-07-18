@@ -1,32 +1,27 @@
-import Clipboard from 'clipboard';
-
 import { resetTheme, settingsJson } from '@/features/theme';
 
 const ConfigOperation = () => {
   const { t } = useTranslation();
 
-  const domRef = useRef<HTMLDivElement | null>(null);
-
   const themeSettingsJson = useAppSelector(settingsJson);
-
   const dispatch = useAppDispatch();
+  const { copy } = useCopy();
 
-  function getClipboardText() {
+  function formatConfigText() {
     const reg = /"\w+":/g;
 
     return themeSettingsJson.replace(reg, match => match.replace(/"/g, ''));
   }
 
-  function initClipboard() {
-    if (!domRef.current) return;
+  async function handleCopy() {
+    const text = formatConfigText();
+    const success = await copy(text);
 
-    const clipboard = new Clipboard(domRef.current, {
-      text: () => getClipboardText()
-    });
-
-    clipboard.on('success', () => {
+    if (success) {
       window.$message?.success(t('theme.configOperation.copySuccessMsg'));
-    });
+    } else {
+      window.$message?.error(t('theme.configOperation.copyFailedMsg'));
+    }
   }
 
   function handleReset() {
@@ -37,10 +32,6 @@ const ConfigOperation = () => {
     }, 50);
   }
 
-  useMount(() => {
-    initClipboard();
-  });
-
   return (
     <div className="flex justify-between">
       <AButton
@@ -49,9 +40,12 @@ const ConfigOperation = () => {
       >
         {t('theme.configOperation.resetConfig')}
       </AButton>
-      <div ref={domRef}>
-        <AButton type="primary">{t('theme.configOperation.copyConfig')}</AButton>
-      </div>
+      <AButton
+        type="primary"
+        onClick={handleCopy}
+      >
+        {t('theme.configOperation.copyConfig')}
+      </AButton>
     </div>
   );
 };
