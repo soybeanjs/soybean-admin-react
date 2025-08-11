@@ -280,7 +280,10 @@ export function useTabManager() {
 
       const initTabs = initTab(themeSettings.tab.cache, updateTabs);
 
-      if (!initTabs || initTabs.length === 0 || (initTabs.length > 0 && !isTabInTabs(tab.id, initTabs))) {
+      const existsInInit = Array.isArray(initTabs) && initTabs.length > 0 && isTabInTabs(tab.id, initTabs);
+      const existsInStore = isTabInTabs(tab.id, tabs);
+
+      if (!existsInInit && !existsInStore) {
         dispatch(addTab(tab));
       }
     } else if (!isTabInTabs(tab.id, tabs)) {
