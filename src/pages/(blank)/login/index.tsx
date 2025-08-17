@@ -52,10 +52,6 @@ const PwdLogin = () => {
     }
   ];
 
-  function handleSubmit(params: LoginParams) {
-    toLogin(params);
-  }
-
   function handleAccountLogin(account: Account) {
     toLogin(account);
   }
@@ -83,7 +79,7 @@ const PwdLogin = () => {
         className="pt-24px"
         form={form}
         initialValues={INITIAL_VALUES}
-        onFinish={handleSubmit}
+        onFinish={toLogin}
       >
         <AForm.Item
           name="userName"
