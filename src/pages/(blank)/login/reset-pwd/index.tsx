@@ -1,6 +1,4 @@
-import { Button, Form, Input, Space } from 'antd';
-
-import { SubmitEnterButton, useFormRules } from '@/features/form';
+import { useFormRules } from '@/features/form';
 import { useRouter } from '@/features/router';
 
 interface FormModel {
@@ -13,92 +11,88 @@ interface FormModel {
 const ResetPwd = () => {
   const { t } = useTranslation();
 
-  const [form] = Form.useForm<FormModel>();
+  const [form] = AForm.useForm<FormModel>();
 
   const { navigateUp } = useRouter();
 
   const { createConfirmPwdRule, formRules } = useFormRules();
 
-  async function handleSubmit() {
-    const params = await form.validateFields();
+  function handleSubmit(params: FormModel) {
     console.log(params);
 
     // request to reset password
     window.$message?.success(t('page.login.common.validateSuccess'));
   }
 
-  console.log('reset-pwd');
+  useKeyPress('enter', () => {
+    form.submit();
+  });
 
   return (
     <>
       <h3 className="text-18px text-primary font-medium">{t('page.login.register.title')}</h3>
-      <Form
+      <AForm
         className="pt-24px"
         form={form}
+        onFinish={handleSubmit}
       >
-        <Form.Item
+        <AForm.Item
           name="phone"
           rules={formRules.phone}
         >
-          <Input placeholder={t('page.login.common.phonePlaceholder')} />
-        </Form.Item>
-        <Form.Item
+          <AInput placeholder={t('page.login.common.phonePlaceholder')} />
+        </AForm.Item>
+        <AForm.Item
           name="code"
           rules={formRules.code}
         >
-          <Input placeholder={t('page.login.common.codePlaceholder')} />
-        </Form.Item>
-        <Form.Item
+          <AInput placeholder={t('page.login.common.codePlaceholder')} />
+        </AForm.Item>
+        <AForm.Item
           name="password"
           rules={formRules.pwd}
         >
-          <Input.Password
+          <AInput.Password
             autoComplete="password"
             placeholder={t('page.login.common.passwordPlaceholder')}
           />
-        </Form.Item>
-        <Form.Item
+        </AForm.Item>
+        <AForm.Item
           name="confirmPassword"
           rules={createConfirmPwdRule(form)}
         >
-          <Input.Password
+          <AInput.Password
             autoComplete="confirm-password"
             placeholder={t('page.login.common.confirmPasswordPlaceholder')}
           />
-        </Form.Item>
-        <Space
+        </AForm.Item>
+        <ASpace
           className="w-full"
           direction="vertical"
           size={18}
         >
-          <SubmitEnterButton
+          <AButton
             block
+            htmlType="submit"
             shape="round"
             size="large"
             type="primary"
-            onClick={handleSubmit}
           >
             {t('common.confirm')}
-          </SubmitEnterButton>
+          </AButton>
 
-          <Button
+          <AButton
             block
             shape="round"
             size="large"
             onClick={navigateUp}
           >
             {t('page.login.common.back')}
-          </Button>
-        </Space>
-      </Form>
+          </AButton>
+        </ASpace>
+      </AForm>
     </>
   );
-};
-
-export const handle = {
-  constant: true,
-  i18nKey: 'route.(blank)_login_reset-pwd',
-  title: 'login_reset-pwd'
 };
 
 export default ResetPwd;

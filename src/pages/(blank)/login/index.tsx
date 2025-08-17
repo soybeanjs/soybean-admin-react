@@ -1,10 +1,9 @@
-import { Button, Checkbox, Divider, Input, Space } from 'antd';
-
 import { loginModuleRecord } from '@/constants/app';
 import { useInitAuth } from '@/features/auth/auth';
-import { SubmitEnterButton, useFormRules } from '@/features/form';
+import { useFormRules } from '@/features/form';
 
 type AccountKey = 'admin' | 'super' | 'user';
+
 interface Account {
   key: AccountKey;
   label: string;
@@ -53,8 +52,7 @@ const PwdLogin = () => {
     }
   ];
 
-  async function handleSubmit() {
-    const params = await form.validateFields();
+  function handleSubmit(params: LoginParams) {
     toLogin(params);
   }
 
@@ -74,6 +72,10 @@ const PwdLogin = () => {
     navigate('reset-pwd');
   }
 
+  useKeyPress('enter', () => {
+    form.submit();
+  });
+
   return (
     <>
       <h3 className="text-18px text-primary font-medium">{t('page.login.pwdLogin.title')}</h3>
@@ -81,76 +83,77 @@ const PwdLogin = () => {
         className="pt-24px"
         form={form}
         initialValues={INITIAL_VALUES}
+        onFinish={handleSubmit}
       >
         <AForm.Item
           name="userName"
           rules={userNameRules}
         >
-          <Input />
+          <AInput />
         </AForm.Item>
 
         <AForm.Item
           name="password"
           rules={pwd}
         >
-          <Input.Password autoComplete="password" />
+          <AInput.Password autoComplete="password" />
         </AForm.Item>
-        <Space
+        <ASpace
           className="w-full"
           direction="vertical"
           size={24}
         >
           <div className="flex-y-center justify-between">
-            <Checkbox>{t('page.login.pwdLogin.rememberMe')}</Checkbox>
+            <ACheckbox>{t('page.login.pwdLogin.rememberMe')}</ACheckbox>
 
-            <Button
+            <AButton
               type="text"
               onClick={goResetPwd}
             >
               {t('page.login.pwdLogin.forgetPassword')}
-            </Button>
+            </AButton>
           </div>
-          <SubmitEnterButton
+          <AButton
             block
+            htmlType="submit"
             loading={loading}
             shape="round"
             size="large"
             type="primary"
-            onClick={handleSubmit}
           >
             {t('common.confirm')}
-          </SubmitEnterButton>
+          </AButton>
           <div className="flex-y-center justify-between gap-12px">
-            <Button
+            <AButton
               block
               className="flex-1"
               onClick={goCodeLogin}
             >
               {t(loginModuleRecord['code-login'])}
-            </Button>
-            <Button
+            </AButton>
+            <AButton
               block
               className="flex-1"
               onClick={goRegister}
             >
               {t(loginModuleRecord.register)}
-            </Button>
+            </AButton>
           </div>
-          <Divider className="!m-0 !text-14px !text-#666">{t('page.login.pwdLogin.otherAccountLogin')}</Divider>
+          <ADivider className="!m-0 !text-14px !text-#666">{t('page.login.pwdLogin.otherAccountLogin')}</ADivider>
           <div className="flex-center gap-12px">
             {accounts.map(item => {
               return (
-                <Button
+                <AButton
                   key={item.key}
                   type="primary"
                   onClick={() => handleAccountLogin(item)}
                 >
                   {item.label}
-                </Button>
+                </AButton>
               );
             })}
           </div>
-        </Space>
+        </ASpace>
       </AForm>
     </>
   );
