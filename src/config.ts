@@ -4,7 +4,6 @@ import type { WatermarkProps } from 'antd';
 import { themeSettings } from './theme/settings';
 import { isPC } from './utils/agent';
 import { getServiceBaseURL } from './utils/service';
-import { localStg } from './utils/storage';
 
 const isDev = import.meta.env.DEV;
 
@@ -14,10 +13,10 @@ const { baseURL, otherBaseURL } = getServiceBaseURL(import.meta.env, isHttpProxy
 
 class GlobalConfig {
   /** - 默认暗色模式 */
-  private _defaultDarkMode = localStg.get('darkMode') || false;
+  private _defaultDarkMode = false;
 
   /** - 默认语言 */
-  private _defaultLang = localStg.get('lang') || 'zh-CN';
+  private _defaultLang: App.I18n.LangType = 'zh-CN';
 
   /** - 默认语言选项 */
   private _defaultLangOptions: App.I18n.LangOption[] = [
@@ -35,7 +34,7 @@ class GlobalConfig {
   private _homePath = import.meta.env.VITE_ROUTE_HOME;
 
   /** - 默认主题颜色 */
-  private _defaultThemeColor = localStg.get('themeColor') || themeSettings.themeColor;
+  private _defaultThemeColor = themeSettings.themeColor;
 
   /** - 是否开发环境 */
   private _isDev = isDev;
@@ -75,9 +74,19 @@ class GlobalConfig {
     return this._defaultDarkMode;
   }
 
+  /** - 设置默认暗色模式 */
+  set defaultDarkMode(darkMode: boolean) {
+    this._defaultDarkMode = darkMode;
+  }
+
   /** - 默认语言 */
   get defaultLang() {
     return this._defaultLang;
+  }
+
+  /** - 设置默认语言 */
+  set defaultLang(lang: App.I18n.LangType) {
+    this._defaultLang = lang;
   }
 
   /** - 默认语言选项 */
@@ -88,6 +97,11 @@ class GlobalConfig {
   /** - 默认主题颜色 */
   get defaultThemeColor() {
     return this._defaultThemeColor;
+  }
+
+  /** - 设置默认主题颜色 */
+  set defaultThemeColor(themeColor: string) {
+    this._defaultThemeColor = themeColor;
   }
 
   /** - 是否开发环境 */

@@ -1,7 +1,7 @@
 {
   "name": "soybean-admin-react",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": false,
   "packageManager": "pnpm@10.4.1",
   "description": "A fresh and elegant admin template, based on React18、Vite5、TypeScript、Ant Design and UnoCSS. 一个基于React18、Vite5、TypeScript、Ant Design and UnoCSS的清新优雅的中后台模版。",

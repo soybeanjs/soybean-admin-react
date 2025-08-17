@@ -1,6 +1,73 @@
 # Changelog
 
 
+## [v2.1.0](https://github.com/soybeanjs/soybean-admin-react/compare/v2.0.0...v2.1.0) (2025-08-18)
+
+### &nbsp;&nbsp;&nbsp;🚀 Features
+
+- 更新描述的版本 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(44b27)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/44b27b2)
+- 更新文档链接 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(d63a2)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/d63a2a4)
+- 支持自定义是否改变地址栏query参数 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(3de47)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/3de47d5)
+- 登录成功的时候用replace消除登录历史堆栈 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(0ae25)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/0ae2592)
+- 修改地址栏参数用replace 以便用户通过历史堆栈能够直接返回到上一个页面 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(8627b)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/8627b0a)
+- 添加全局配置 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(465d8)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/465d838)
+- 添加cursor规则 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(c8559)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/c85594f)
+- 删除cursor规则头部文件注释 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(4bfd3)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/4bfd3cc)
+- **project**:
+  - add ui demo &nbsp;-&nbsp; by @SkyRoc1 [<samp>(00538)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/005381c)
+  - opimize code &nbsp;-&nbsp; by @SkyRoc1 [<samp>(5b4df)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/5b4df37)
+- **projects**:
+  - optimize breadcrumb  implementation &nbsp;-&nbsp; by @SkyRoc1 [<samp>(b9c44)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/b9c441b)
+
+### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes
+
+- 修正角色状态列标题的翻译键 &nbsp;-&nbsp; by **MengChen** [<samp>(19b1c)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/19b1c7a)
+- 修复function无法正常跳转 .close 41 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(72686)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/72686b3)
+- 修复tab栏删除相应页面没有去除缓存 &nbsp;-&nbsp; by @SkyRoc1 in https://github.com/soybeanjs/soybean-admin-react/issues/46 [<samp>(ada16)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/ada16c9)
+- 修复使用右键菜单不能消除缓存的页面 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(589f6)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/589f6d0)
+- fixed the issue where loading was not properly closed in some cases. &nbsp;-&nbsp; by @SkyRoc1 [<samp>(ea5e3)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/ea5e39d)
+- 修复点击logo一直增加tab &nbsp;-&nbsp; by @SkyRoc1 in https://github.com/soybeanjs/soybean-admin-react/issues/39 [<samp>(cb5cf)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/cb5cf66)
+- 表格搜索同步至url上时， 重置表单 input输入值 无法被重置 &nbsp;-&nbsp; by @SkyRoc1 in https://github.com/soybeanjs/soybean-admin-react/issues/44 [<samp>(47b49)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/47b4952)
+- env.d.ts 中的 VITE_ICON_LOCAL_PREFIX 类型错误 &nbsp;-&nbsp; by **chenziwen** [<samp>(03675)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/036753a)
+- fix the issue where ESLint fails to automatically fix the code. &nbsp;-&nbsp; by @SkyRoc1 [<samp>(d3e04)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/d3e04d6)
+- optimize the verification rules for duplicate calls &nbsp;-&nbsp; by @SkyRoc1 [<samp>(c1cfe)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/c1cfee7)
+- **project**:
+  - fix the issue where the theme cannot respond to the reset operation.  close #63 &nbsp;-&nbsp; by @SkyRoc1 in https://github.com/soybeanjs/soybean-admin-react/issues/63 [<samp>(ded68)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/ded68d3)
+- **projects**:
+  - fix menu modal cannot slide all the way to the bottom. &nbsp;-&nbsp; by @SkyRoc1 [<samp>(4c543)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/4c543d3)
+  - theme config copy &nbsp;-&nbsp; by @wenyuanw [<samp>(ff0b0)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/ff0b08a)
+  - in some cases, the tab homepage may be duplicated. &nbsp;-&nbsp; by **Azir-11** [<samp>(21f25)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/21f25f9)
+
+### &nbsp;&nbsp;&nbsp;🛠 Optimizations
+
+- 优化代码 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(424e8)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/424e8a5)
+- 优化代码 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(67bff)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/67bff43)
+- 优化代码 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(7a1cd)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/7a1cd89)
+- 根据全局配置优化部分代码 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(ddeff)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/ddeff82)
+- 接着优化相同的可以作为config的相关代码 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(ad28d)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/ad28df5)
+- 优化代码 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(a8c12)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/a8c12ec)
+- 删除所有头部文件注释的相关规则 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(bfc5e)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/bfc5ef5)
+- 优化 useRequest 演示界面 &nbsp;-&nbsp; by @wenyuanw [<samp>(a3eea)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/a3eeac2)
+- **tabHooks**: optimize tab closing logic. &nbsp;-&nbsp; by **A2ayak** [<samp>(6ba50)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/6ba50d0)
+
+### &nbsp;&nbsp;&nbsp;💅 Refactors
+
+- 首页的转发路径为动态 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(d31d6)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/d31d6a3)
+
+### &nbsp;&nbsp;&nbsp;🏡 Chore
+
+- 更新有关链接 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(b75ca)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/b75ca4e)
+- 更新 welcome message 中的文档链接 &nbsp;-&nbsp; by **howie166** [<samp>(4e6fc)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/4e6fc0b)
+
+### &nbsp;&nbsp;&nbsp;🎨 Styles
+
+- 优化代码格式 &nbsp;-&nbsp; by @SkyRoc1 [<samp>(3f501)</samp>](https://github.com/soybeanjs/soybean-admin-react/commit/3f501b3)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![SkyRoc1](https://github.com/SkyRoc1.png?size=48)](https://github.com/SkyRoc1)&nbsp;&nbsp;[![wenyuanw](https://github.com/wenyuanw.png?size=48)](https://github.com/wenyuanw)&nbsp;&nbsp;
+[Azir-11](mailto:2075125282@qq.com),&nbsp;[A2ayak](mailto:429853312@qq.com),&nbsp;[chenziwen](mailto:chenziwen@qesong.com),&nbsp;[howie166](mailto:howie166@163.com),&nbsp;[顾家铭](mailto:3088929030@qq.com),&nbsp;[MengChen](mailto:tatsukimengchen@163.com)
+
 ## [v2.0.0](https://github.com/soybeanjs/soybean-admin-react/compare/v1.2.0...v2.0.0) (2025-03-20)
 
 ### &nbsp;&nbsp;&nbsp;🚀 Features
