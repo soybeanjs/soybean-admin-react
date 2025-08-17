@@ -6,7 +6,17 @@
   "eslint.useFlatConfig": true,
   "editor.guides.bracketPairs": "active",
   "editor.formatOnSave": false,
-  "eslint.validate": ["html", "css", "scss", "json", "jsonc"],
+  "eslint.validate": [
+    "html",
+    "css",
+    "scss",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "jsonc"
+  ],
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "package.json": "package-lock.json, pnpm*, .editorconfig,.gitattributes,.gitignore,.npmrc,tsconfig.json",
