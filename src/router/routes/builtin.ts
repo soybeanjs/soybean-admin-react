@@ -93,7 +93,7 @@ export const BaseChildrenRoutes = [
           localIcon: 'logo',
           order: 0,
           title: 'document_ui',
-          url: 'https://ui-playground.ohh-889.com/button'
+          url: 'https://ui-play.skyroc.me/button'
         },
         id: 'document_ui',
         lazy: () => import('@/pages/_builtin/iframe-page').then(convert),
