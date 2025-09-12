@@ -1,4 +1,4 @@
-import { addAPIProvider, disableCache } from '@iconify/react';
+import { addAPIProvider } from '@iconify/react';
 
 /** Setup the iconify offline */
 export function setupIconifyOffline() {
@@ -6,7 +6,5 @@ export function setupIconifyOffline() {
 
   if (VITE_ICONIFY_URL) {
     addAPIProvider('', { resources: [VITE_ICONIFY_URL] });
-
-    disableCache('all');
   }
 }
