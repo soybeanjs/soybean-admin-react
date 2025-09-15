@@ -1,5 +1,5 @@
 import type { RouterNavigateOptions, To } from 'react-router-dom';
-import { createBrowserRouter, matchRoutes } from 'react-router-dom';
+import { createBrowserRouter, createHashRouter, matchRoutes } from 'react-router-dom';
 
 import { globalConfig } from '@/config';
 import { initCacheRoutes, routes } from '@/router';
@@ -30,16 +30,28 @@ function initRouter() {
     return false;
   }
 
-  const reactRouter = createBrowserRouter(routes, {
-    basename: import.meta.env.VITE_BASE_URL,
-    patchRoutesOnNavigation: async ({ patch, path }) => {
-      if (getIsNeedPatch(path)) {
-        isAlreadyPatch = true;
+  const reactRouter =
+    import.meta.env.VITE_ROUTER_HISTORY_MODE === 'hash'
+      ? createHashRouter(routes, {
+          basename: import.meta.env.VITE_BASE_URL,
+          patchRoutesOnNavigation: async ({ patch, path }) => {
+            if (getIsNeedPatch(path)) {
+              isAlreadyPatch = true;
 
-        await initAuthRoutes(patch);
-      }
-    }
-  });
+              await initAuthRoutes(patch);
+            }
+          }
+        })
+      : createBrowserRouter(routes, {
+          basename: import.meta.env.VITE_BASE_URL,
+          patchRoutesOnNavigation: async ({ patch, path }) => {
+            if (getIsNeedPatch(path)) {
+              isAlreadyPatch = true;
+
+              await initAuthRoutes(patch);
+            }
+          }
+        });
 
   store.dispatch(setCacheRoutes(initCacheRoutes));
 
