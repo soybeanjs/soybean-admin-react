@@ -1,5 +1,5 @@
 import type { RouterNavigateOptions, To } from 'react-router-dom';
-import { createBrowserRouter, matchRoutes } from 'react-router-dom';
+import { createBrowserRouter, createHashRouter, createMemoryRouter, matchRoutes } from 'react-router-dom';
 
 import { globalConfig } from '@/config';
 import { initCacheRoutes, routes } from '@/router';
@@ -30,16 +30,31 @@ function initRouter() {
     return false;
   }
 
-  const reactRouter = createBrowserRouter(routes, {
+  const routerOptions = {
     basename: import.meta.env.VITE_BASE_URL,
-    patchRoutesOnNavigation: async ({ patch, path }) => {
+    patchRoutesOnNavigation: async ({ patch, path }: { patch: any; path: string }) => {
       if (getIsNeedPatch(path)) {
         isAlreadyPatch = true;
 
         await initAuthRoutes(patch);
       }
     }
-  });
+  };
+
+  const historyMode = import.meta.env.VITE_ROUTER_HISTORY_MODE || 'history';
+  let reactRouter: ReturnType<typeof createBrowserRouter>;
+
+  switch (historyMode) {
+    case 'hash':
+      reactRouter = createHashRouter(routes, routerOptions);
+      break;
+    case 'memory':
+      reactRouter = createMemoryRouter(routes, routerOptions);
+      break;
+    default:
+      reactRouter = createBrowserRouter(routes, routerOptions);
+      break;
+  }
 
   store.dispatch(setCacheRoutes(initCacheRoutes));
 
